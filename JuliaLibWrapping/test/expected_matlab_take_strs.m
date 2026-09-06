@@ -1,6 +1,6 @@
 function out = take_strs(a)
     arguments
-        a 
+        a
     end
     out = libdemo_mex('take_strs', cellstr(a));
 end

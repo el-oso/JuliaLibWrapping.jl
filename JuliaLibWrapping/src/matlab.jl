@@ -552,7 +552,7 @@ function _write_matlab_facade(io::IO, dest::MatlabTarget, method::MethodDesc, pl
             # single class declaration covers; the body sorts it out.
             validation = isnothing(plan.enums[i]) ?
                 " " * _matlab_arg_validation(plan.args[i], name) : ""
-            println(io, "        ", name, validation)
+            println(io, rstrip("        " * name * validation))
         end
         for (j, name) in pairs(plan.keywords)
             i = length(plan.positional) + j
@@ -561,7 +561,7 @@ function _write_matlab_facade(io::IO, dest::MatlabTarget, method::MethodDesc, pl
                 " " * _matlab_arg_validation(plan.args[i], name) : ""
             suffix = isnothing(default) ? "" :
                 " = " * _matlab_literal(something(default))
-            println(io, "        opts.", name, validation, suffix)
+            println(io, rstrip("        opts." * name * validation * suffix))
         end
 
         println(io, "    end")
